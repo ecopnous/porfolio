@@ -4,7 +4,7 @@ import { ProjectsPageContent } from "@/components/projects/projects-page-content
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Projects | Tech Founder & CTO",
+  title: "Projects | Ecopnous",
   description:
     "Explore a portfolio of scalable digital products across Fintech, SaaS, AI, Real Estate, and IoT — engineered for global impact.",
 }

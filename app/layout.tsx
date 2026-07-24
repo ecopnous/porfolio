@@ -15,9 +15,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Tech Founder & CTO | Building Scalable Digital Platforms',
+  title: 'Ecopnous | Building Scalable Digital Platforms',
   description:
-    'Personal brand website of a Tech Founder and CTO building intelligent, scalable digital systems across Fintech, SaaS, AI, Real Estate, and IoT.',
+    'Personal brand website of Ecopnous — building intelligent, scalable digital systems across Fintech, SaaS, AI, Real Estate, and IoT.',
   generator: 'v0.app',
   icons: {
     icon: [

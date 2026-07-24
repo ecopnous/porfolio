@@ -39,8 +39,8 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         {/* Copy */}
         <div>
-          <p className="animate-fade-in-up text-sm font-medium tracking-[0.2em] text-primary uppercase">
-            TechFounder
+          <p className="animate-fade-in-up text-sm font-medium tracking-tight">
+            <span className="text-primary">CTO and Co-founder</span>
           </p>
 
           <h1 className="animate-fade-in-up animation-delay-200 mt-6 text-5xl font-bold leading-[1.05] tracking-tight text-foreground text-balance md:text-6xl lg:text-7xl">
@@ -93,7 +93,7 @@ export function HeroSection() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-secondary">
             <Image
               src="/images/portrait.png"
-              alt="TechFounder portrait"
+              alt="Ecopnous portrait"
               fill
               priority
               className="object-cover object-top transition-transform duration-700 hover:scale-[1.03]"

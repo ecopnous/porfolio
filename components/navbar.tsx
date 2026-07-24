@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { SiteBrand } from "@/components/site-brand"
 
 const navLinks = [
   { label: "Products", href: "/#products" },
@@ -29,9 +30,7 @@ export function Navbar() {
         }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link href="/" className="text-lg font-bold tracking-tight text-foreground">
-          <span className="text-primary">{"<E />"}</span>copnous
-        </Link>
+        <SiteBrand />
 
         <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
