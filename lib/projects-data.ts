@@ -32,6 +32,8 @@ export interface Project {
   lastUpdate: string
   featured: boolean
   createdAt: string
+  /** YouTube video ID or full URL (watch, youtu.be, embed, shorts). */
+  youtubeVideoId?: string
   screenshots: string[]
   overview: {
     description: string
@@ -80,6 +82,7 @@ export const projects: Project[] = [
     lastUpdate: "January 2026",
     featured: true,
     createdAt: "2025-03-15",
+    youtubeVideoId: "https://www.youtube.com/watch?v=DF3XjEhJ40Y&list=RDMMDF3XjEhJ40Y&start_radio=1",
     screenshots: [
       "/images/projects/bookkeeping-app.jpg",
       "/images/projects/bookkeeping-app-2.jpg",
@@ -149,7 +152,11 @@ export const projects: Project[] = [
     lastUpdate: "December 2025",
     featured: true,
     createdAt: "2024-11-20",
+    youtubeVideoId: "https://www.youtube.com/watch?v=gtgIlIXWEhI&list=RDgtgIlIXWEhI&start_radio=1",
     screenshots: [
+      "/images/projects/property-platform.jpg",
+      "/images/projects/property-platform-2.jpg",
+      "/images/projects/property-platform-3.jpg",
       "/images/projects/property-platform.jpg",
       "/images/projects/property-platform-2.jpg",
       "/images/projects/property-platform-3.jpg",
@@ -218,6 +225,7 @@ export const projects: Project[] = [
     lastUpdate: "February 2026",
     featured: false,
     createdAt: "2025-06-10",
+    youtubeVideoId: "zQnBQ4tB3ZA",
     screenshots: [
       "/images/projects/inventory-system.jpg",
       "/images/projects/inventory-system-2.jpg",
@@ -287,6 +295,7 @@ export const projects: Project[] = [
     lastUpdate: "January 2026",
     featured: true,
     createdAt: "2025-01-08",
+    youtubeVideoId: "aircAruvnKk",
     screenshots: [
       "/images/projects/ai-messaging.jpg",
       "/images/projects/ai-messaging-2.jpg",
@@ -356,6 +365,7 @@ export const projects: Project[] = [
     lastUpdate: "November 2025",
     featured: false,
     createdAt: "2025-08-22",
+    youtubeVideoId: "w7ejDZ8SWv8",
     screenshots: [
       "/images/projects/building-monitoring.jpg",
       "/images/projects/building-monitoring-2.jpg",
@@ -418,6 +428,48 @@ export type ClientProject = Omit<Project, "icon">
 export function toClientProject(project: Project): ClientProject {
   const { icon: _icon, ...rest } = project
   return rest
+}
+
+/**
+ * Accepts a bare ID or any common YouTube URL and returns the 11-char video ID.
+ * Examples:
+ * - gtgIlIXWEhI
+ * - https://www.youtube.com/watch?v=gtgIlIXWEhI&list=RDgtgIlIXWEhI&start_radio=1
+ * - https://youtu.be/gtgIlIXWEhI
+ * - watch?v=gtgIlIXWEhI&list=...
+ */
+export function extractYouTubeVideoId(input: string): string | null {
+  const trimmed = input.trim()
+  if (!trimmed) return null
+
+  if (/^[\w-]{11}$/.test(trimmed)) return trimmed
+
+  const fromQuery = trimmed.match(/[?&]v=([\w-]{11})/)
+  if (fromQuery) return fromQuery[1]
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(trimmed)
+      ? trimmed
+      : `https://www.youtube.com/${trimmed.replace(/^\//, "")}`
+    const url = new URL(withProtocol)
+
+    const v = url.searchParams.get("v")
+    if (v && /^[\w-]{11}$/.test(v)) return v
+
+    if (url.hostname.replace(/^www\./, "") === "youtu.be") {
+      const id = url.pathname.split("/").filter(Boolean)[0]
+      if (id && /^[\w-]{11}$/.test(id)) return id
+    }
+
+    const pathMatch = url.pathname.match(
+      /\/(?:embed|shorts|live|v)\/([\w-]{11})/
+    )
+    if (pathMatch) return pathMatch[1]
+  } catch {
+    // fall through
+  }
+
+  return null
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {

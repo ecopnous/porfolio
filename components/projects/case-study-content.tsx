@@ -17,6 +17,8 @@ import {
 } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import type { ClientProject } from "@/lib/projects-data"
+import { ProjectVideo } from "./project-video"
+import { ProjectGallery } from "./project-gallery"
 
 interface CaseStudyContentProps {
   project: ClientProject
@@ -141,6 +143,33 @@ export function CaseStudyContent({
           </div>
         </div>
       </section>
+
+      {/* Product Demo Video */}
+      {project.youtubeVideoId && (
+        <section className="px-6 py-20">
+          <div className="mx-auto max-w-5xl">
+            <AnimatedSection>
+              <span className="text-xs font-medium uppercase tracking-widest text-primary">
+                Watch Demo
+              </span>
+              <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
+                See it in action
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                A walkthrough of the product experience — core flows, interface,
+                and how it solves the problem end to end.
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection className="mt-10" delay={150}>
+              <ProjectVideo
+                videoId={project.youtubeVideoId}
+                title={project.title}
+              />
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* Problem */}
       <section className="px-6 py-20 bg-card/50">
@@ -300,23 +329,15 @@ export function CaseStudyContent({
             <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
               Gallery
             </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              Click any frame to open the full viewer — navigate with arrows or
+              your keyboard.
+            </p>
           </AnimatedSection>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {project.gallery.map((img, i) => (
-              <AnimatedSection key={i} delay={i * 100}>
-                <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
-                  <Image
-                    src={img}
-                    alt={`${project.title} screenshot ${i + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-background/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+          <AnimatedSection delay={120}>
+            <ProjectGallery images={project.gallery} title={project.title} />
+          </AnimatedSection>
         </div>
       </section>
 
