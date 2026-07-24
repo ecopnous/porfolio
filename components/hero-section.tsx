@@ -100,7 +100,7 @@ export function HeroSection() {
               sizes="(max-width: 1024px) 380px, 420px"
             />
             <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/45 via-transparent to-transparent"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"
               aria-hidden="true"
             />
             <div

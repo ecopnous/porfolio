@@ -25,12 +25,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
         {/* Category tag */}
         <div className="absolute top-4 left-4">
           <span
-            className={`rounded-full border border-border/50 bg-card/80 backdrop-blur-sm px-3 py-1 text-[10px] font-medium uppercase tracking-widest ${project.color}`}
+            className={`rounded-full border border-white/15 bg-black/50 backdrop-blur-sm px-3 py-1 text-[10px] font-medium uppercase tracking-widest ${project.color}`}
           >
             {project.category}
           </span>

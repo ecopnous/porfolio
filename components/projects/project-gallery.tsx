@@ -176,9 +176,9 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
             className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             sizes="(max-width: 768px) 100vw, 66vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-border/50 bg-card/80 text-foreground backdrop-blur-md">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-md">
               <Expand size={20} />
             </span>
           </div>
@@ -201,7 +201,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-card/80 text-foreground backdrop-blur-md">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-md">
                 <Expand size={16} />
               </span>
             </div>
@@ -231,14 +231,14 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
             />
 
             {remaining > 0 ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-background/45 transition-colors duration-300 group-hover:bg-background/55">
-                <span className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              <div className="absolute inset-0 flex items-center justify-center bg-black/50 transition-colors duration-300 group-hover:bg-black/60">
+                <span className="text-3xl font-bold tracking-tight text-white md:text-4xl">
                   +{remaining}
                 </span>
               </div>
             ) : (
               <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-card/80 text-foreground backdrop-blur-md">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-md">
                   <Expand size={16} />
                 </span>
               </div>

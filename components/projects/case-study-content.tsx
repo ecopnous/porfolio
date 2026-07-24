@@ -64,7 +64,7 @@ export function CaseStudyContent({
         <div className="absolute top-24 left-6 z-40 md:left-8">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-300 hover:border-primary/30 hover:text-primary"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-black/50 backdrop-blur-sm px-4 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:border-primary/40 hover:text-primary"
           >
             <ChevronLeft size={16} />
             All Projects
@@ -79,19 +79,19 @@ export function CaseStudyContent({
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
 
           <div className="absolute bottom-0 left-0 right-0 px-6 pb-12">
             <div className="mx-auto max-w-5xl">
               <span
-                className={`inline-flex rounded-full border border-border/50 bg-card/60 backdrop-blur-sm px-4 py-1.5 text-xs font-medium uppercase tracking-widest ${project.color}`}
+                className={`inline-flex rounded-full border border-white/15 bg-black/40 backdrop-blur-sm px-4 py-1.5 text-xs font-medium uppercase tracking-widest ${project.color}`}
               >
                 {project.category}
               </span>
-              <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl text-balance">
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl text-balance">
                 {project.title}
               </h1>
-              <p className="mt-4 text-lg text-muted-foreground md:text-xl">
+              <p className="mt-4 text-lg text-white/70 md:text-xl">
                 {project.tagline}
               </p>
             </div>
