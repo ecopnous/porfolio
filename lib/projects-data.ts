@@ -157,9 +157,6 @@ export const projects: Project[] = [
       "/images/projects/property-platform.jpg",
       "/images/projects/property-platform-2.jpg",
       "/images/projects/property-platform-3.jpg",
-      "/images/projects/property-platform.jpg",
-      "/images/projects/property-platform-2.jpg",
-      "/images/projects/property-platform-3.jpg",
     ],
     overview: {
       description:
