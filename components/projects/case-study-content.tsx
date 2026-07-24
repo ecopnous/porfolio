@@ -60,8 +60,8 @@ export function CaseStudyContent({
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Banner */}
       <section className="relative overflow-hidden">
-        {/* Back button */}
-        <div className="absolute top-6 left-6 z-30">
+        {/* Back button — below fixed navbar */}
+        <div className="absolute top-24 left-6 z-40 md:left-8">
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-300 hover:border-primary/30 hover:text-primary"
