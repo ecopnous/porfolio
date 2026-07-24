@@ -10,12 +10,16 @@ interface ProjectGalleryProps {
   title: string
 }
 
+const PREVIEW_COUNT = 3
+
 export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
 
   const isOpen = activeIndex !== null
   const count = images.length
+  const remaining = Math.max(0, count - PREVIEW_COUNT)
+  const previewImages = images.slice(0, PREVIEW_COUNT)
 
   const close = useCallback(() => setActiveIndex(null), [])
 
@@ -56,7 +60,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
 
   if (count === 0) return null
 
-  const [featured, ...rest] = images
+  const [featured, second, third] = previewImages
 
   const lightbox =
     mounted &&
@@ -69,7 +73,6 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
         aria-label={`${title} gallery viewer`}
         className="fixed inset-0 z-[200] flex items-center justify-center"
       >
-        {/* Backdrop — click to close */}
         <button
           type="button"
           aria-label="Close gallery"
@@ -77,7 +80,6 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
           className="absolute inset-0 bg-black/85 backdrop-blur-sm"
         />
 
-        {/* Close */}
         <button
           type="button"
           onClick={close}
@@ -87,12 +89,10 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
           <X size={20} />
         </button>
 
-        {/* Counter */}
         <div className="absolute top-5 left-4 z-30 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/90 backdrop-blur-sm md:top-7 md:left-6">
           {activeIndex + 1} / {count}
         </div>
 
-        {/* Prev / Next */}
         {count > 1 && (
           <>
             <button
@@ -114,7 +114,6 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
           </>
         )}
 
-        {/* Centered image */}
         <div
           className="relative z-20 flex max-h-[78vh] max-w-[92vw] items-center justify-center md:max-w-[80vw]"
           onClick={(e) => e.stopPropagation()}
@@ -131,12 +130,11 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
           />
         </div>
 
-        {/* Thumbnails */}
         {count > 1 && (
-          <div className="absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2 px-4 md:bottom-6">
+          <div className="absolute inset-x-0 bottom-4 z-30 flex max-w-full justify-center gap-2 overflow-x-auto px-4 md:bottom-6">
             {images.map((img, i) => (
               <button
-                key={img}
+                key={`${img}-${i}`}
                 type="button"
                 onClick={() => setActiveIndex(i)}
                 aria-label={`View image ${i + 1}`}
@@ -165,6 +163,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   return (
     <>
       <div className="mt-12 grid gap-3 md:grid-cols-12 md:grid-rows-2 md:min-h-[480px]">
+        {/* Image 1 — featured */}
         <button
           type="button"
           onClick={() => setActiveIndex(0)}
@@ -183,44 +182,69 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
               <Expand size={20} />
             </span>
           </div>
-          <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
-            <p className="text-sm font-medium text-foreground">Featured view</p>
-            <span className="rounded-md bg-background/60 px-2.5 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur-sm">
-              1 / {count}
-            </span>
-          </div>
         </button>
 
-        {rest.map((img, i) => {
-          const index = i + 1
-          return (
-            <button
-              key={img}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              className={`group relative col-span-12 aspect-[16/10] overflow-hidden rounded-2xl border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:col-span-4 md:aspect-auto md:min-h-0 ${
-                rest.length === 1 ? "md:row-span-2" : ""
+        {/* Image 2 */}
+        {second && (
+          <button
+            type="button"
+            onClick={() => setActiveIndex(1)}
+            className={`group relative col-span-12 aspect-[16/10] overflow-hidden rounded-2xl border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:col-span-4 md:aspect-auto md:min-h-0 ${
+              !third ? "md:row-span-2" : ""
+            }`}
+          >
+            <Image
+              src={second}
+              alt={`${title} — view 2`}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-card/80 text-foreground backdrop-blur-md">
+                <Expand size={16} />
+              </span>
+            </div>
+          </button>
+        )}
+
+        {/* Image 3 — with +N if more images exist */}
+        {third && (
+          <button
+            type="button"
+            onClick={() => setActiveIndex(2)}
+            aria-label={
+              remaining > 0
+                ? `Open gallery, ${remaining} more photos`
+                : `${title} — view 3`
+            }
+            className="group relative col-span-12 aspect-[16/10] overflow-hidden rounded-2xl border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:col-span-4 md:aspect-auto md:min-h-0"
+          >
+            <Image
+              src={third}
+              alt={`${title} — view 3`}
+              fill
+              className={`object-cover transition-transform duration-700 group-hover:scale-[1.04] ${
+                remaining > 0 ? "brightness-75" : ""
               }`}
-            >
-              <Image
-                src={img}
-                alt={`${title} — view ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-background/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+
+            {remaining > 0 ? (
+              <div className="absolute inset-0 flex items-center justify-center bg-background/45 transition-colors duration-300 group-hover:bg-background/55">
+                <span className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  +{remaining}
+                </span>
+              </div>
+            ) : (
               <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-card/80 text-foreground backdrop-blur-md">
                   <Expand size={16} />
                 </span>
               </div>
-              <span className="absolute bottom-3 right-3 rounded-md bg-background/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground backdrop-blur-sm">
-                {index + 1} / {count}
-              </span>
-            </button>
-          )
-        })}
+            )}
+          </button>
+        )}
       </div>
 
       {lightbox}

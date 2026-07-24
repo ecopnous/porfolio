@@ -129,6 +129,9 @@ export const projects: Project[] = [
       "/images/projects/bookkeeping-app.jpg",
       "/images/projects/bookkeeping-app-2.jpg",
       "/images/projects/bookkeeping-app-3.jpg",
+      "/images/projects/inventory-system.jpg",
+      "/images/projects/ai-messaging.jpg",
+      "/images/projects/property-platform.jpg",
     ],
   },
   {
@@ -199,6 +202,8 @@ export const projects: Project[] = [
       "/images/projects/property-platform.jpg",
       "/images/projects/property-platform-2.jpg",
       "/images/projects/property-platform-3.jpg",
+      "/images/projects/building-monitoring.jpg",
+      "/images/projects/bookkeeping-app.jpg",
     ],
   },
   {
@@ -269,6 +274,10 @@ export const projects: Project[] = [
       "/images/projects/inventory-system.jpg",
       "/images/projects/inventory-system-2.jpg",
       "/images/projects/inventory-system-3.jpg",
+      "/images/projects/ai-messaging-2.jpg",
+      "/images/projects/property-platform-2.jpg",
+      "/images/projects/building-monitoring-2.jpg",
+      "/images/projects/bookkeeping-app-2.jpg",
     ],
   },
   {
@@ -339,6 +348,8 @@ export const projects: Project[] = [
       "/images/projects/ai-messaging.jpg",
       "/images/projects/ai-messaging-2.jpg",
       "/images/projects/ai-messaging-3.jpg",
+      "/images/projects/inventory-system.jpg",
+      "/images/projects/bookkeeping-app-3.jpg",
     ],
   },
   {
@@ -409,6 +420,9 @@ export const projects: Project[] = [
       "/images/projects/building-monitoring.jpg",
       "/images/projects/building-monitoring-2.jpg",
       "/images/projects/building-monitoring-3.jpg",
+      "/images/projects/property-platform-3.jpg",
+      "/images/projects/inventory-system-3.jpg",
+      "/images/projects/ai-messaging.jpg",
     ],
   },
 ]
