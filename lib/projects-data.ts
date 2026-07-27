@@ -5,6 +5,7 @@ import {
   MessageSquare,
   Activity,
   type LucideIcon,
+  GraduationCap,
 } from "lucide-react"
 
 export interface ProjectFeature {
@@ -61,6 +62,241 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    slug: "irb-hemophilie-his",
+    icon: Activity,
+    category: "SaaS",
+    title: "IRB Hemophilia — Hospital Information System",
+    tagline: "Unified clinical platform for hemophilia patient care",
+    description:
+      "A complete hospital information system for hemophilia care: medical records, consultations, laboratory, imaging, pharmacy, billing, and clinical messaging — with multi-hospital support.",
+    thumbnail: "https://i.ibb.co/QvjQmv89/1.png",
+    bannerImage: "https://i.ibb.co/bTybgbf/2.png",
+    tech: [
+      "Laravel 13",
+      "Livewire 4 / Volt",
+      "Flux UI",
+      "Tailwind CSS 4",
+      "MySQL",
+      "Redis",
+      "PowerGrid",
+      "DomPDF",
+      "Maatwebsite Excel",
+      "Google Gemini AI",
+    ],
+    color: "text-indigo-500",
+    bgColor: "bg-indigo-500/10",
+    rating: 4.9,
+    reviewCount: 0,
+    platform: "Web Application",
+    version: "1.0.0",
+    deploymentType: "On-premise / Cloud",
+    lastUpdate: "June 2026",
+    featured: true,
+    createdAt: "2025-04-01",
+    youtubeVideoId: "",
+    screenshots: [
+      "/images/projects/irb-hemophilie.jpg",
+      "/images/projects/irb-hemophilie-2.jpg",
+      "/images/projects/irb-hemophilie-3.jpg",
+    ],
+    overview: {
+      description:
+        "IRB Hemophilia is a full-stack hospital platform built to digitize the care pathway for patients with hemophilia. It centralizes the patient record, consultations, laboratory, imaging, pharmacy, hospitalization, billing, and clinical coordination in a single web interface — with multi-facility support and end-to-end clinical traceability.",
+      businessContext:
+        "Hemophilia reference centers manage long, complex care journeys: rich medical histories, recurring lab work, imaging, prescriptions, hospitalizations, and cross-service coordination. Paper workflows and generic HIS tools fragment information. IRB Hemophilia fills that gap with a specialty-focused medical record, clinical workflows, and a longitudinal patient view.",
+      targetUsers:
+        "Physicians, nurses, laboratory technicians, radiologists, pharmacists, reception staff, billing teams, and administrators of hospitals or hospital groups specializing in hemophilia care.",
+    },
+    problem:
+      "Clinical teams relied on scattered data across paper registers, spreadsheets, and non-specialized software. This caused consultation delays, loss of external medical history, unreliable billing, and weak coordination between lab, imaging, and pharmacy — critical risks for a chronic condition like hemophilia.",
+    solution: {
+      strategy:
+        "Build a real-time Livewire web application centered on the patient journey — from medical record to billing — with multi-hospital isolation, bulk imports, external document archiving, and decision-support tools (clinical evolution dashboards + AI analysis).",
+      technicalApproach:
+        "Laravel 13 backend with Livewire 4 / Volt for interactive UX without a heavy SPA. Flux UI and Tailwind for a clear hospital interface. PowerGrid for operational data tables. Queues for large Excel imports. DomPDF for orders and patient dossiers. Google Gemini for longitudinal patient analysis. Secure storage for attachments and external archives.",
+    },
+    architecture: {
+      backend:
+        "Modular Laravel 13 monolith (patients, consultations, lab, imaging, pharmacy, hospitalization, billing, messaging). Livewire Volt screens, dedicated domain services (messaging, evolution, analytics), and asynchronous import jobs.",
+      database:
+        "Relational MySQL covering patient dossiers, consultations, clinical acts, laboratories, imaging studies, prescriptions, inventory, financial documents, and clinical messages. Multi-facility isolation via hopital_id scoping.",
+      scalability:
+        "Async processing of bulk imports through Laravel queues. Hospital/session caching. Ready for multi-instance deployment behind a reverse proxy, with files on local disk or object storage.",
+      systemDesign:
+        "Lightweight multi-tenant model (current hospital in session). Patient profile as the central hub. Clinical modules connected through consultations and acts. Internal clinical messaging plus patient notifications. External archives for off-platform documents. Analytics and longitudinal evolution for clinical follow-up.",
+    },
+    features: [
+      { title: "Hemophilia Patient Record", description: "Enriched medical chart: identity, history, first signs, allergies, family and personal background" },
+      { title: "Consultations & Triage", description: "Consultation intake, triage, clinical acts, history, and service-level follow-up" },
+      { title: "Laboratory", description: "Exam orders, specimen collection, result entry, validation, lab stock, and reports" },
+      { title: "Medical Imaging", description: "Imaging exam workflows, image uploads, and printable order forms" },
+      { title: "Hospital Pharmacy", description: "Medicines, stock, movements, prescriptions, and depreciations" },
+      { title: "Hospitalization", description: "Admission desk, unit configuration, and hospitalization-linked billing" },
+      { title: "Billing & Insurance", description: "Invoices, payments, cash desk, tariffs, inventory, financial documents, and insurance billing" },
+      { title: "Clinical Messaging", description: "Internal coordination, attachments, templates, folders (inbox/archives), and patient notifications" },
+      { title: "Patient Evolution + AI", description: "Longitudinal dashboards (KPIs, charts) and deep analysis powered by Google Gemini" },
+      { title: "External Archives", description: "Document vault for PDFs and images from other hospitals or information systems" },
+      { title: "Multi-Hospital Support", description: "Hospital groups, facility switching, and data isolation by hopital_id" },
+      { title: "Imports & Exports", description: "Async Excel/CSV import for patients and consultations, plus PDF/Excel analytics exports" },
+    ],
+    results: {
+      impact:
+        "End-to-end digitization of the hemophilia care pathway: one shared record for clinic, lab, imaging, pharmacy, and billing — with preserved external history.",
+      performance:
+        "Responsive Livewire UI, background processing for heavy imports, PDF generation for dossiers/orders, analytics dashboards, and patient evolution charts.",
+      business:
+        "Fewer information gaps between services, stronger clinical and financial traceability, and faster coordination and reporting for specialized care centers.",
+    },
+    gallery: [
+      "https://i.ibb.co/DHGVMmTk/380shots-so.png",
+      "https://i.ibb.co/9HN0mP8R/21shots-so.png",
+      "https://i.ibb.co/MDZRd6pF/362shots-so.png",
+      "https://i.ibb.co/M5t9rgxC/407shots-so.png",
+      "https://i.ibb.co/G4yvtKdM/474shots-so.png",
+      "https://i.ibb.co/k6zmgmrF/512shots-so.png",
+      "https://i.ibb.co/JWT0KtYw/186shots-so.png",
+      "https://i.ibb.co/yzS4ZHh/857shots-so.png",
+      "https://i.ibb.co/RkDymTf7/529shots-so.png",
+      "https://i.ibb.co/DfmF6CnL/632shots-so.png",
+    ],
+  },
+  {
+    slug: "ischool-issi",
+    icon: GraduationCap,
+    category: "SaaS",
+    title: "ischool — ISSI School Finance",
+    tagline: "Student administration and school finance for a higher nursing institute",
+    description:
+      "Web platform for student records, minerval collection by installment, dual-currency treasury, PDF receipts with QR verification, and role-based staff access.",
+    thumbnail: "https://i.ibb.co/93dXhDgG/68shots-so.png",
+    bannerImage: "https://i.ibb.co/93dXhDgG/68shots-so.png",
+    tech: [
+      "Laravel 13",
+      "Livewire 4",
+      "Flux UI",
+      "Tailwind CSS 4",
+      "PostgreSQL / MySQL",
+      "DomPDF",
+      "Spatie Permission",
+      "Fortify",
+      "Vite",
+    ],
+    color: "text-[#83151E]",
+    bgColor: "bg-[#83151E]/10",
+    rating: 4.7,
+    reviewCount: 0,
+    platform: "Web Application",
+    version: "1.0.0",
+    deploymentType: "Self-hosted / VPS",
+    lastUpdate: "July 2026",
+    featured: true,
+    createdAt: "2026-01-15",
+    youtubeVideoId: "",
+    screenshots: [
+      "/images/projects/ischool-issi.jpg",
+      "/images/projects/ischool-issi-2.jpg",
+      "/images/projects/ischool-issi-3.jpg",
+    ],
+    overview: {
+      description:
+        "ischool is an internal school management and finance platform built for the Institut Supérieur en Sciences Infirmières (ISSI). It centralizes student records, academic structure (years, promotions, classes), tuition (minerval) collected by installments, treasury accounts, expense vouchers, and printable PDF receipts — including a public QR portal so students can verify minerval payments with their matricule.",
+      businessContext:
+        "Higher education institutes in the DRC often run finance operations with spreadsheets, paper receipts, and fragmented tools. Cashiers need dual-currency (USD/CDF) handling, installment tracking for minerval, audit trails, and professional receipts. Academic staff need student files, promotion passage, and scholarship flags without switching systems.",
+      targetUsers:
+        "Cashiers and finance officers, school administrators, academic secretaries, and — via a limited public portal — students verifying their minerval receipts. Access is role-based (from standard user to super-admin).",
+    },
+    problem:
+      "Tuition collection, treasury movements, and student administration were scattered across manual processes. Staff needed a single French-language web app to register payments by nature (minerval, concours, diplôme, kits infirmiers, stages, projects…), print dual-copy A5 receipts, track remaining minerval balances, manage advances and treasury accounts, and export financial reports — with clear permissions and an auditable transaction history.",
+    solution: {
+      strategy:
+        "We delivered a mobile-responsive Livewire web app (not a native mobile client) so cashiers and admins can work from the browser. Finance logic lives in dedicated domain services (transactions, receipts, balances, treasury, advances) rather than fat controllers. Receipts are generated as DomPDF documents (admin + student copies, portrait A5) and can be reprinted with custom signature labels.",
+      technicalApproach:
+        "Laravel 13 + Livewire 4 + Flux UI power the interactive admin UI. Fortify handles authentication (including 2FA and passkeys). Spatie Permission enforces fine-grained abilities (students, payments, treasury, reports, users). DomPDF stores receipt PDFs on disk; Bacon QR codes link to a tokenized public portal gated by student matricule. Dual-currency amounts convert to USD via exchange rates for consistent balances and reports.",
+    },
+    architecture: {
+      backend:
+        "Laravel service layer (ReceiptService, TransactionRegistrar, StudentBalanceService, TreasuryService, AdvanceService, ReportExportService) with Livewire pages for dashboards, students, payments, advances, treasury, accounting, reports, and school settings.",
+      database:
+        "Relational schema for students, academic years, promotions, classes, tranches, payment natures, financial transactions, receipts, advances, treasury accounts/movements, and promotion passages. Soft deletes on students; activity logging on financial operations.",
+      scalability:
+        "Modular monolith suited to a single-institution deployment. Queue-ready Laravel setup for async work; printable PDFs stored per academic year. Role-based authorization keeps sensitive finance actions scoped to cashiers and admins.",
+      systemDesign:
+        "Posted income/expense ledger with receipt issuance on successful payments. Minerval balances computed from due amounts vs paid installments. Public read-only portal unlocked by receipt token + matricule. PDF reprint regenerates the document when signatures or data change.",
+    },
+    features: [
+      {
+        title: "Student Management",
+        description:
+          "Student files with matricule generation, scholarship status, class/promotion, and minerval due amounts",
+      },
+      {
+        title: "Minerval by Installments",
+        description:
+          "Tuition collection by tranche with live remaining balance (solde avant / payé / reste dû) on receipts",
+      },
+      {
+        title: "Dual-Currency Finance",
+        description:
+          "USD and CDF payments with exchange-rate conversion to USD for balances and reporting",
+      },
+      {
+        title: "PDF Receipts (A5 Portrait)",
+        description:
+          "Professional DomPDF receipts with admin + student copies, customizable signature labels, and reprint",
+      },
+      {
+        title: "QR Verification Portal",
+        description:
+          "Public minerval receipt portal unlocked by QR token and student matricule",
+      },
+      {
+        title: "Treasury & Advances",
+        description:
+          "Treasury accounts, cash movements, and salary/project advances with repayments",
+      },
+      {
+        title: "Payment Natures Catalog",
+        description:
+          "Configurable natures: minerval, concours, diplôme, kits, stages, projects, and payroll charges",
+      },
+      {
+        title: "Roles, 2FA & Audit",
+        description:
+          "Spatie permissions, Fortify 2FA/passkeys, and activity logs on financial transactions",
+      },
+      {
+        title: "Reports & Analytics",
+        description:
+          "Dashboard charts plus CSV/PDF financial and operational exports",
+      },
+      {
+        title: "Promotion Passage",
+        description:
+          "Academic year progression workflow for moving students between promotions",
+      },
+    ],
+    results: {
+      impact:
+        "Gives ISSI a single operational system for student records, cashiers, and finance instead of paper/spreadsheet workflows — from payment capture to printable dual-copy receipts and student self-verification.",
+      performance:
+        "Server-rendered Livewire UI with DomPDF receipt generation stored on disk for fast reprint. Portrait A5 dual-page receipts (admin + student) ready for immediate print.",
+      business:
+        "Clearer minerval tracking by installment, dual-currency consistency in USD, stronger cash-desk accountability via roles and activity logs, and fewer disputes thanks to QR-verifiable receipts.",
+    },
+    gallery: [
+      "https://i.ibb.co/2Vtcp8v/197shots-so.png",
+      "https://i.ibb.co/Y7K4CLsz/791shots-so.png",
+      "https://i.ibb.co/C5Njky7Z/375shots-so.png",
+      "https://i.ibb.co/3LB3nXB/936shots-so.png",
+      "https://i.ibb.co/dJ0861FX/309shots-so.png",
+      "https://i.ibb.co/zVj2Hnc8/905shots-so.png",
+      "https://i.ibb.co/V0YkkC3n/602shots-so.png",
+      "https://i.ibb.co/qFNH5hwR/618shots-so.png",
+      "https://i.ibb.co/xqW08zJ1/696shots-so.png",
+      // "https://ibb.co/CC7VSJb"
+    ],
+  },
   {
     slug: "bookkeeping-mobile-app",
     icon: Wallet,
