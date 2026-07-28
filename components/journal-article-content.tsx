@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Check, ChevronLeft, Clock3, Quote } from "lucide-react"
 import type { JournalArticle } from "@/lib/journal-data"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 
 function EditorialHeroArt({ number }: { number: string }) {
   return (
@@ -120,5 +121,26 @@ export function JournalArticleContent({
         </div>
       </section>
     </div>
+  )
+}
+
+export function RemoteJournalArticleContent({ slug }: { slug: string }) {
+  const { items, loading, error } = usePublishedCollection<JournalArticle>("journalArticles")
+  const index = items.findIndex((article) => article.slug === slug)
+
+  if (loading) {
+    return <div className="flex min-h-[70vh] items-center justify-center text-muted-foreground">Chargement de l&apos;article…</div>
+  }
+
+  if (error || index === -1) {
+    return <div className="mx-auto flex min-h-[70vh] max-w-2xl items-center px-6 text-center"><div><p className="text-xs font-semibold uppercase tracking-[.18em] text-primary">Journal</p><h1 className="mt-4 text-3xl font-bold">Article indisponible</h1><p className="mt-3 text-muted-foreground">{error ?? "Cet article n’existe pas ou n’est pas encore publié."}</p><Link href="/journal" className="mt-7 inline-flex text-sm font-semibold text-primary">Retour au Journal</Link></div></div>
+  }
+
+  return (
+    <JournalArticleContent
+      article={items[index]}
+      prevArticle={index > 0 ? items[index - 1] : null}
+      nextArticle={index < items.length - 1 ? items[index + 1] : null}
+    />
   )
 }

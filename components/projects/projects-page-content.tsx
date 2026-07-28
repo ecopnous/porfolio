@@ -1,16 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import {
-  filterAndSortProjects,
-  type Category,
-  type SortOption,
-} from "@/lib/projects-data"
+import { filterAndSortProjectList, type Category, type PublicProject, type SortOption } from "@/lib/projects-data"
 import { ProjectsHero } from "./projects-hero"
 import { ProjectFilter } from "./project-filter"
 import { ProjectCard } from "./project-card"
 import { useInView } from "@/hooks/use-in-view"
 import { useRef } from "react"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 
 export function ProjectsPageContent() {
   const [search, setSearch] = useState("")
@@ -18,8 +15,9 @@ export function ProjectsPageContent() {
   const [sort] = useState<SortOption>("featured")
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { threshold: 0.05 })
+  const { items: projects, loading } = usePublishedCollection<PublicProject>("projects")
 
-  const filtered = filterAndSortProjects(activeCategory, sort, search)
+  const filtered = filterAndSortProjectList(projects, activeCategory, sort, search)
 
   return (
     <>
@@ -46,13 +44,14 @@ export function ProjectsPageContent() {
             ))}
           </div>
 
-          {filtered.length === 0 && (
+          {!loading && filtered.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <p className="text-lg text-muted-foreground">
                 No projects match your filters.
               </p>
             </div>
           )}
+          {loading && <p className="py-20 text-center text-muted-foreground">Chargement des projets…</p>}
         </div>
       </div>
     </>

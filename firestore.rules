@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /admins/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    match /{collection}/{document} {
+      allow read: if (collection in ["journalArticles", "experiences", "projects", "testimonials", "clients"]) &&
+        (resource.data.published == true || isAdmin());
+      allow create, update, delete: if collection in ["journalArticles", "experiences", "projects", "testimonials", "clients"] && isAdmin();
+    }
+  }
+}

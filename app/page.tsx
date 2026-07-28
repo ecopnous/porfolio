@@ -8,6 +8,7 @@ import { ArchitectureSection } from "@/components/architecture-section"
 import { TechStackSection } from "@/components/tech-stack-section"
 import { StatsSection } from "@/components/stats-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
+import { ExperiencesSection } from "@/components/experiences-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 
@@ -22,6 +23,7 @@ export default function Page() {
       <TrustSection />
       <ArchitectureSection />
       <TechStackSection />
+      <ExperiencesSection />
       <StatsSection />
       <TestimonialsSection />
       <ContactSection />

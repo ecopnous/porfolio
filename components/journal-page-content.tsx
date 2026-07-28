@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight, Clock3, Mail, MoveRight, Sparkles } from "lucide-react"
-import { journalArticles, type JournalCategory } from "@/lib/journal-data"
+import type { JournalArticle, JournalCategory } from "@/lib/journal-data"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 
 type Category = "Tout" | JournalCategory
 
@@ -48,6 +49,7 @@ function EditorialArtwork({
 
 export function JournalPageContent() {
   const [activeCategory, setActiveCategory] = useState<Category>("Tout")
+  const { items: journalArticles, loading } = usePublishedCollection<JournalArticle>("journalArticles")
   const visiblePosts = useMemo(
     () => journalArticles.filter((post) => activeCategory === "Tout" || post.category === activeCategory),
     [activeCategory]
@@ -100,6 +102,7 @@ export function JournalPageContent() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14 md:py-20">
+        {loading && <p className="py-16 text-center text-sm text-muted-foreground">Chargement des articles…</p>}
         {featuredPost ? (
           <article className="group grid overflow-hidden rounded-3xl border border-border bg-card lg:grid-cols-2">
             <EditorialArtwork variant="featured" className="min-h-72 lg:min-h-[31rem]" />
@@ -124,7 +127,7 @@ export function JournalPageContent() {
               </Link>
             </div>
           </article>
-        ) : (
+        ) : !loading && (
           <p className="py-16 text-center text-muted-foreground">Aucun article dans cette catégorie pour le moment.</p>
         )}
 

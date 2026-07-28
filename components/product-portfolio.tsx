@@ -3,12 +3,16 @@
 import { useRef } from "react"
 import Link from "next/link"
 import { useInView } from "@/hooks/use-in-view"
-import { ArrowUpRight } from "lucide-react"
-import { projects } from "@/lib/projects-data"
+import { ArrowUpRight, Layers } from "lucide-react"
+import type { PublicProject } from "@/lib/projects-data"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 
 export function ProductPortfolio() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { threshold: 0.1 })
+  const { items: projects } = usePublishedCollection<PublicProject>("projects")
+
+  if (projects.length === 0) return null
 
   return (
     <section id="products" ref={ref} className="relative py-32 px-6">
@@ -55,7 +59,7 @@ export function ProductPortfolio() {
                   <div
                     className={`flex h-12 w-12 items-center justify-center rounded-xl ${project.bgColor} ${project.color}`}
                   >
-                    <project.icon size={22} />
+                    <Layers size={22} />
                   </div>
                   <span
                     className={`rounded-full border border-border px-3 py-1 text-[10px] font-medium uppercase tracking-widest ${project.color}`}

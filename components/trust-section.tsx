@@ -5,9 +5,9 @@ import Image from "next/image"
 import { useInView } from "@/hooks/use-in-view"
 import {
   getClientMonogram,
-  trustClients,
   type TrustClient,
 } from "@/lib/trust-clients"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 
 function ClientLogo({ client }: { client: TrustClient }) {
   const [failed, setFailed] = useState(false)
@@ -78,6 +78,11 @@ function ClientCard({ client }: { client: TrustClient }) {
 export function TrustSection() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { threshold: 0.15 })
+  const { items: storedClients } = usePublishedCollection<TrustClient & { imageUrl?: string }>("clients")
+  const trustClients = storedClients.map((client) => ({
+    ...client,
+    logo: client.logo || client.imageUrl,
+  }))
 
   if (trustClients.length === 0) return null
 

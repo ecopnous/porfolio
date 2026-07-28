@@ -3,10 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
-import type { Project } from "@/lib/projects-data"
+import type { PublicProject } from "@/lib/projects-data"
 
 interface ProjectCardProps {
-  project: Project
+  project: PublicProject
   index: number
 }
 

@@ -671,6 +671,7 @@ export type SortOption = "featured" | "recent" | "category"
 
 /** Project payload safe to pass from Server → Client Components (no React components). */
 export type ClientProject = Omit<Project, "icon">
+export type PublicProject = ClientProject
 
 export function toClientProject(project: Project): ClientProject {
   const { icon: _icon, ...rest } = project
@@ -766,6 +767,33 @@ export function filterAndSortProjects(
       filtered.sort((a, b) => a.category.localeCompare(b.category))
       break
   }
+
+  return filtered
+}
+
+export function filterAndSortProjectList(
+  projectList: PublicProject[],
+  category: Category,
+  sort: SortOption,
+  search: string
+): PublicProject[] {
+  let filtered = [...projectList]
+
+  if (category !== "All") filtered = filtered.filter((project) => project.category === category)
+
+  if (search.trim()) {
+    const query = search.toLowerCase()
+    filtered = filtered.filter(
+      (project) =>
+        project.title.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.tech.some((tech) => tech.toLowerCase().includes(query))
+    )
+  }
+
+  if (sort === "featured") filtered.sort((a, b) => Number(b.featured) - Number(a.featured) || b.rating - a.rating)
+  if (sort === "recent") filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  if (sort === "category") filtered.sort((a, b) => a.category.localeCompare(b.category))
 
   return filtered
 }

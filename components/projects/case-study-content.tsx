@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import type { ClientProject } from "@/lib/projects-data"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 import { ProjectVideo } from "./project-video"
 import { ProjectGallery } from "./project-gallery"
 
@@ -473,4 +474,19 @@ export function CaseStudyContent({
       </section>
     </div>
   )
+}
+
+export function RemoteCaseStudyContent({ slug }: { slug: string }) {
+  const { items, loading, error } = usePublishedCollection<ClientProject>("projects")
+  const index = items.findIndex((project) => project.slug === slug)
+
+  if (loading) {
+    return <div className="flex min-h-[70vh] items-center justify-center text-muted-foreground">Chargement du projet…</div>
+  }
+
+  if (error || index === -1) {
+    return <div className="mx-auto flex min-h-[70vh] max-w-2xl items-center px-6 text-center"><div><p className="text-xs font-semibold uppercase tracking-[.18em] text-primary">Projets</p><h1 className="mt-4 text-3xl font-bold">Projet indisponible</h1><p className="mt-3 text-muted-foreground">{error ?? "Ce projet n’existe pas ou n’est pas encore publié."}</p><Link href="/projects" className="mt-7 inline-flex text-sm font-semibold text-primary">Retour aux projets</Link></div></div>
+  }
+
+  return <CaseStudyContent project={items[index]} prevProject={index > 0 ? items[index - 1] : null} nextProject={index < items.length - 1 ? items[index + 1] : null} />
 }

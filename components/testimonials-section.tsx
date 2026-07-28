@@ -6,9 +6,9 @@ import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import {
   clampRating,
-  testimonials,
   type Testimonial,
 } from "@/lib/testimonials-data"
+import { usePublishedCollection } from "@/hooks/use-published-collection"
 import {
   Carousel,
   CarouselContent,
@@ -106,6 +106,7 @@ export function TestimonialsSection() {
   const [api, setApi] = useState<CarouselApi>()
   const [selected, setSelected] = useState(0)
   const [count, setCount] = useState(0)
+  const { items: testimonials } = usePublishedCollection<Testimonial>("testimonials")
 
   const onSelect = useCallback((carouselApi: CarouselApi) => {
     if (!carouselApi) return
@@ -134,7 +135,7 @@ export function TestimonialsSection() {
     }, 6000)
 
     return () => window.clearInterval(id)
-  }, [api, isInView])
+  }, [api, isInView, testimonials.length])
 
   if (testimonials.length === 0) return null
 
