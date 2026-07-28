@@ -9,7 +9,7 @@ import { SiteBrand } from "@/components/site-brand"
 const navLinks = [
   { label: "Products", href: "/#products" },
   { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Journal", href: "/journal" },
 ]
 
 export function Navbar() {
