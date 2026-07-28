@@ -106,7 +106,8 @@ export function TestimonialsSection() {
   const [api, setApi] = useState<CarouselApi>()
   const [selected, setSelected] = useState(0)
   const [count, setCount] = useState(0)
-  const { items: testimonials } = usePublishedCollection<Testimonial>("testimonials")
+  const { items: testimonials, loading } = usePublishedCollection<Testimonial>("testimonials")
+  const isVisible = isInView || !loading
 
   const onSelect = useCallback((carouselApi: CarouselApi) => {
     if (!carouselApi) return
@@ -153,7 +154,7 @@ export function TestimonialsSection() {
       <div className="mx-auto max-w-7xl">
         <div
           className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <div className="max-w-xl">
@@ -192,7 +193,7 @@ export function TestimonialsSection() {
 
         <div
           className={`mt-12 transition-all duration-700 delay-100 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <Carousel

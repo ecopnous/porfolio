@@ -10,7 +10,8 @@ import { usePublishedCollection } from "@/hooks/use-published-collection"
 export function ProductPortfolio() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { threshold: 0.1 })
-  const { items: projects } = usePublishedCollection<PublicProject>("projects")
+  const { items: projects, loading } = usePublishedCollection<PublicProject>("projects")
+  const isVisible = isInView || !loading
 
   if (projects.length === 0) return null
 
@@ -19,7 +20,7 @@ export function ProductPortfolio() {
       <div className="mx-auto max-w-7xl">
         <div
           className={`transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <span className="text-xs font-medium uppercase tracking-widest text-primary">
@@ -45,9 +46,9 @@ export function ProductPortfolio() {
         <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <div
-              key={project.title}
+              key={project.id}
               className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:border-primary/30 hover:shadow-[0_0_50px_rgba(0,212,170,0.06)] ${
-                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               } ${index === 0 ? "md:col-span-2 lg:col-span-1" : ""}`}
               style={{ transitionDelay: `${(index + 1) * 150}ms` }}
             >

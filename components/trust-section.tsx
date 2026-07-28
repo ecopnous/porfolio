@@ -78,7 +78,8 @@ function ClientCard({ client }: { client: TrustClient }) {
 export function TrustSection() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { threshold: 0.15 })
-  const { items: storedClients } = usePublishedCollection<TrustClient & { imageUrl?: string }>("clients")
+  const { items: storedClients, loading } = usePublishedCollection<TrustClient & { imageUrl?: string }>("clients")
+  const isVisible = isInView || !loading
   const trustClients = storedClients.map((client) => ({
     ...client,
     logo: client.logo || client.imageUrl,
@@ -95,7 +96,7 @@ export function TrustSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div
-          className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
         >
           <div className="max-w-xl">
@@ -118,15 +119,15 @@ export function TrustSection() {
         </div>
 
         <div
-          className={`mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 transition-all duration-700 delay-150 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 transition-all duration-700 delay-150 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
         >
           {trustClients.map((client, index) => (
             <div
-              key={client.name}
+              key={client.id}
               className="transition-all duration-500"
               style={{
-                transitionDelay: isInView
+                transitionDelay: isVisible
                   ? `${Math.min(index, 8) * 60}ms`
                   : undefined,
               }}
