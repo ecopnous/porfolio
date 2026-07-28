@@ -40,7 +40,7 @@ export function HeroSection() {
         {/* Copy */}
         <div>
           <p className="animate-fade-in-up text-sm font-medium tracking-tight">
-            <span className="text-primary">CTO and Co-founder</span>
+            <span className="text-primary">CTO and Co-founder at Zerobug</span>
           </p>
 
           <h1 className="animate-fade-in-up animation-delay-200 mt-6 text-5xl font-bold leading-[1.05] tracking-tight text-foreground text-balance md:text-6xl lg:text-7xl">

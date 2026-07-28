@@ -16,7 +16,7 @@ export interface ProjectFeature {
 export interface Project {
   slug: string
   icon: LucideIcon
-  category: "Fintech" | "Real Estate" | "SaaS" | "AI" | "IoT"
+  category: "Fintech" | "Real Estate" | "SaaS" | "ERP" | "AI" | "IoT"
   title: string
   tagline: string
   description: string
