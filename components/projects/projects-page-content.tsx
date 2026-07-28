@@ -40,7 +40,7 @@ export function ProjectsPageContent() {
             }`}
           >
             {filtered.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
 

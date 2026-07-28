@@ -25,13 +25,13 @@ function ClientLogo({ client }: { client: TrustClient }) {
   }
 
   return (
-    <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-secondary/60 p-2">
+    <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-secondary/60">
       <Image
         src={client.logo}
         alt=""
         width={40}
         height={40}
-        className="h-8 w-8 object-contain"
+        className="h-full w-full object-cover"
         onError={() => setFailed(true)}
       />
     </div>

@@ -771,12 +771,12 @@ export function filterAndSortProjects(
   return filtered
 }
 
-export function filterAndSortProjectList(
-  projectList: PublicProject[],
+export function filterAndSortProjectList<T extends PublicProject>(
+  projectList: T[],
   category: Category,
   sort: SortOption,
   search: string
-): PublicProject[] {
+): T[] {
   let filtered = [...projectList]
 
   if (category !== "All") filtered = filtered.filter((project) => project.category === category)

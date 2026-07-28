@@ -52,7 +52,7 @@ export function JournalPageContent() {
   const { items: journalArticles, loading } = usePublishedCollection<JournalArticle>("journalArticles")
   const visiblePosts = useMemo(
     () => journalArticles.filter((post) => activeCategory === "Tout" || post.category === activeCategory),
-    [activeCategory]
+    [activeCategory, journalArticles]
   )
   const featuredPost = visiblePosts.find((post) => post.featured) ?? visiblePosts[0]
   const remainingPosts = visiblePosts.filter((post) => post !== featuredPost)
@@ -141,7 +141,7 @@ export function JournalPageContent() {
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {remainingPosts.map((post) => (
-            <article key={post.number} className="group flex flex-col rounded-2xl border border-border bg-card p-3 transition-transform duration-300 hover:-translate-y-1">
+            <article key={post.id} className="group flex flex-col rounded-2xl border border-border bg-card p-3 transition-transform duration-300 hover:-translate-y-1">
               <EditorialArtwork variant={post.number} className="aspect-[4/3] rounded-xl" />
               <div className="flex flex-1 flex-col px-3 pb-3 pt-6">
                 <div className="flex items-center justify-between text-xs uppercase tracking-[0.14em] text-primary">
