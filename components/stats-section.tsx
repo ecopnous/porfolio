@@ -78,7 +78,7 @@ export function StatsSection() {
   const isInView = useInView(ref, { threshold: 0.25 })
 
   return (
-    <section ref={ref} className="relative overflow-hidden px-6 py-28">
+    <section ref={ref} className="relative overflow-hidden px-6 py-20 md:py-24">
       <div
         className="pointer-events-none absolute inset-0 bg-secondary/40"
         aria-hidden="true"

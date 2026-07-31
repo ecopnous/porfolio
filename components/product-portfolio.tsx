@@ -16,7 +16,7 @@ export function ProductPortfolio() {
   if (projects.length === 0) return null
 
   return (
-    <section id="products" ref={ref} className="relative py-32 px-6">
+    <section id="products" ref={ref} className="relative px-6 py-20 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div
           className={`transition-all duration-700 ${

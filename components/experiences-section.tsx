@@ -17,7 +17,7 @@ export function ExperiencesSection() {
   if (loading || items.length === 0) return null
 
   return (
-    <section id="experiences" className="px-6 py-28">
+    <section id="experiences" className="px-6 py-20 md:py-24">
       <div className="mx-auto max-w-7xl">
         <p className="text-xs font-semibold uppercase tracking-[.18em] text-primary">Parcours</p>
         <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">Expériences & collaborations</h2>

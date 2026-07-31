@@ -16,7 +16,7 @@ export function FeaturedProduct() {
   const isInView = useInView(ref, { threshold: 0.15 })
 
   return (
-    <section ref={ref} className="relative py-32 px-6 overflow-hidden">
+    <section ref={ref} className="relative overflow-hidden px-6 py-20 md:py-24">
       {/* Ambient glow */}
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/4 blur-[150px]"

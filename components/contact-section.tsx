@@ -10,7 +10,7 @@ export function ContactSection() {
   const [submitted, setSubmitted] = useState(false)
 
   return (
-    <section id="contact" ref={ref} className="relative py-32 px-6">
+    <section id="contact" ref={ref} className="relative px-6 py-20 md:py-24">
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-primary/3 blur-[150px]"
         aria-hidden="true"

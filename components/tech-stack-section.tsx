@@ -113,7 +113,7 @@ export function TechStackSection() {
   )
 
   return (
-    <section id="stack" ref={ref} className="relative py-32 px-6">
+    <section id="stack" ref={ref} className="relative px-6 py-20 md:py-24">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"
         aria-hidden="true"

@@ -144,7 +144,7 @@ export function TestimonialsSection() {
     <section
       id="testimonials"
       ref={sectionRef}
-      className="relative overflow-hidden px-6 py-28"
+      className="relative overflow-hidden px-6 py-20 md:py-24"
     >
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"

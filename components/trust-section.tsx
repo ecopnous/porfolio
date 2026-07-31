@@ -88,7 +88,7 @@ export function TrustSection() {
   if (trustClients.length === 0) return null
 
   return (
-    <section id="trust" ref={ref} className="relative overflow-hidden px-6 py-28">
+    <section id="trust" ref={ref} className="relative overflow-hidden px-6 py-20 md:py-24">
       <div
         className="pointer-events-none absolute inset-0 bg-secondary/30"
         aria-hidden="true"

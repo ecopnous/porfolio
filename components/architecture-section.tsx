@@ -48,7 +48,7 @@ export function ArchitectureSection() {
   const isInView = useInView(ref, { threshold: 0.1 })
 
   return (
-    <section id="architecture" ref={ref} className="relative py-32 px-6">
+    <section id="architecture" ref={ref} className="relative px-6 py-20 md:py-24">
       {/* Background accent */}
       <div
         className="pointer-events-none absolute inset-0 bg-secondary/30"
