@@ -25,39 +25,37 @@ export function FeaturedProduct() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div
-          className={`transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <span className="text-xs font-medium uppercase tracking-widest text-primary">
             Featured Product
           </span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            Fintech Bookkeeping Platform
+            Point-of-sale management
           </h2>
         </div>
 
         <div className="mt-16 grid items-center gap-16 lg:grid-cols-2">
           {/* Mobile Mockup */}
           <div
-            className={`flex items-center justify-center transition-all duration-1000 ${
-              isInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
+            className={`flex items-center justify-center transition-all duration-1000 ${isInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              }`}
           >
             <div className="relative">
               {/* Phone frame */}
               <div className="relative mx-auto w-[280px] rounded-[2.5rem] border-2 border-border bg-card p-3 shadow-[0_0_60px_rgba(0,212,170,0.08)] animate-float">
-                <div className="overflow-hidden rounded-[2rem] bg-secondary">
-                  {/* Status bar */}
-                  <div className="flex items-center justify-between bg-card px-5 py-3">
+                {/* <div className="overflow-hidden rounded-[2rem] bg-secondary"> */}
+                {/* Status bar */}
+                {/* <div className="flex items-center justify-between bg-card px-5 py-3">
                     <span className="text-[10px] text-muted-foreground">9:41</span>
                     <div className="flex gap-1">
                       <div className="h-1.5 w-3 rounded-sm bg-muted-foreground" />
                       <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
                     </div>
-                  </div>
-                  {/* App content mockup */}
-                  <div className="space-y-4 px-5 pb-6 pt-4">
+                  </div> */}
+                {/* App content mockup */}
+                {/* <div className="space-y-4 px-5 pb-6 pt-4">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
                         <Smartphone size={16} className="text-primary" />
@@ -104,22 +102,26 @@ export function FeaturedProduct() {
                         </div>
                       ))}
                     </div>
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div> */}
+                <img
+                  src="https://i.ibb.co/cSGpTZJV/Screenshot-20260525-151644.jpg"
+                  alt="e-Money Business App Mockup"
+                  width={280}
+                  height={600}
+                  className="rounded-[2rem]"
+                />
               </div>
             </div>
           </div>
 
           {/* Content */}
           <div
-            className={`transition-all duration-1000 delay-300 ${
-              isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
+            className={`transition-all duration-1000 delay-300 ${isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+              }`}
           >
             <p className="text-lg leading-relaxed text-muted-foreground">
-              A comprehensive mobile-first bookkeeping platform designed for modern businesses.
-              Built with Flutter for cross-platform performance, backed by a robust Laravel API,
-              and secured with bank-grade encryption protocols.
+              A cloud-based management solution that digitizes and centralizes the operations of mobile money shops and electronic financial service agencies. From transaction recording to financial reporting, everything is managed through one intuitive platform.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -134,7 +136,7 @@ export function FeaturedProduct() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
-              {["Flutter", "Laravel", "PostgreSQL", "Redis", "AWS"].map((tech) => (
+              {["Flutter", "Supabase", "PostgreSQL"].map((tech) => (
                 <span
                   key={tech}
                   className="rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs font-medium text-muted-foreground"
@@ -145,7 +147,7 @@ export function FeaturedProduct() {
             </div>
 
             <Link
-              href="/projects/bookkeeping-mobile-app"
+              href="/projects/e-money-business"
               className="mt-8 inline-flex items-center gap-2 text-primary font-semibold transition-all hover:gap-3"
             >
               View Case Study <ArrowUpRight size={18} />
