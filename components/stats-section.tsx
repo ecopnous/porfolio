@@ -17,7 +17,7 @@ const stats = [
     detail: "Scalable backends & infrastructures",
   },
   {
-    value: 10,
+    value: 6,
     suffix: "+",
     label: "Years of experience",
     detail: "Building digital products end to end",
@@ -90,9 +90,8 @@ export function StatsSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div
-          className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="max-w-xl">
             <span className="text-xs font-medium uppercase tracking-widest text-primary">
@@ -112,11 +111,9 @@ export function StatsSection() {
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`relative px-1 py-10 transition-all duration-700 md:px-8 ${
-                index < stats.length - 1 ? "md:border-r md:border-border" : ""
-              } ${
-                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+              className={`relative px-1 py-10 transition-all duration-700 md:px-8 ${index < stats.length - 1 ? "md:border-r md:border-border" : ""
+                } ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
               style={{ transitionDelay: `${index * 120}ms` }}
             >
               <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">

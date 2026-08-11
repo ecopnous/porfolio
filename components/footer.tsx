@@ -9,13 +9,19 @@ export function Footer() {
           {"© 2026 All rights reserved. Designed & engineered with precision."}
         </p>
         <div className="flex gap-6">
-          {["LinkedIn", "GitHub", "Twitter"].map((s) => (
+          {[
+            { name: "LinkedIn", url: "https://www.linkedin.com/in/ecopnous-banzuzi-024560255/" },
+            { name: "GitHub", url: "https://github.com/ecopnous" },
+            { name: "Twitter", url: "https://x.com/ecopnous" }
+          ].map((social) => (
             <a
-              key={s}
-              href="#"
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xs text-muted-foreground transition-colors hover:text-primary"
             >
-              {s}
+              {social.name}
             </a>
           ))}
         </div>

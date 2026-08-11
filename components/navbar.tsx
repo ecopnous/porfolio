@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { SiteBrand } from "@/components/site-brand"
 
 const navLinks = [
-  { label: "Products", href: "/#products" },
+  { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Journal", href: "/journal" },
 ]

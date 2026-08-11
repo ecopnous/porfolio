@@ -8,6 +8,13 @@ export function ContactSection() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { threshold: 0.2 })
   const [submitted, setSubmitted] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+
+  // TODO: replace this with your real contact email
+  const RECIPIENT_EMAIL = "hello@ecopnous.com"
 
   return (
     <section id="contact" ref={ref} className="relative px-6 py-20 md:py-24">
@@ -20,9 +27,8 @@ export function ContactSection() {
         <div className="grid gap-16 lg:grid-cols-2">
           {/* Left column */}
           <div
-            className={`transition-all duration-700 ${
-              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <span className="text-xs font-medium uppercase tracking-widest text-primary">
               Get in Touch
@@ -40,13 +46,14 @@ export function ContactSection() {
 
             <div className="mt-10 flex flex-col gap-4">
               {[
-                { label: "LinkedIn", href: "#" },
-                { label: "GitHub", href: "#" },
-                { label: "Twitter / X", href: "#" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/ecopnous-banzuzi-024560255/" },
+                { label: "GitHub", href: "https://github.com/ecopnous" },
+                { label: "Twitter / X", href: "https://x.com/ecopnous" },
               ].map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
                   className="group flex items-center gap-3 text-muted-foreground transition-colors hover:text-primary"
                 >
                   <div className="h-px w-8 bg-border transition-all duration-300 group-hover:w-12 group-hover:bg-primary" />
@@ -62,9 +69,8 @@ export function ContactSection() {
 
           {/* Right column - form */}
           <div
-            className={`transition-all duration-700 delay-200 ${
-              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`transition-all duration-700 delay-200 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             {submitted ? (
               <div className="flex h-full items-center justify-center rounded-2xl border border-primary/20 bg-card p-12 text-center">
@@ -83,6 +89,16 @@ export function ContactSection() {
                 className="space-y-6 rounded-2xl border border-border bg-card p-8 md:p-10"
                 onSubmit={(e) => {
                   e.preventDefault()
+
+                  const subjectLine = `[Portfolio Contact] ${subject || "General Inquiry"} — ${name}`
+                  const body = `Name: ${name}\nEmail: ${email}\n\nSubject: ${subject || "(not specified)"}\n\nMessage:\n${message}\n\n---\nThis message was sent from the portfolio contact form.`
+                  const mailto = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(
+                    subjectLine
+                  )}&body=${encodeURIComponent(body)}`
+
+                  // Open user's mail client with prefilled message
+                  window.location.href = mailto
+
                   setSubmitted(true)
                 }}
               >
@@ -97,6 +113,8 @@ export function ContactSection() {
                     id="name"
                     type="text"
                     required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Your name"
                     className="w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary"
                   />
@@ -112,6 +130,8 @@ export function ContactSection() {
                     id="email"
                     type="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
                     className="w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary"
                   />
@@ -126,17 +146,18 @@ export function ContactSection() {
                   <select
                     id="subject"
                     className="w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary"
-                    defaultValue=""
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     required
                   >
                     <option value="" disabled>
                       Select a topic
                     </option>
-                    <option value="partnership">Technical Partnership</option>
-                    <option value="advisory">CTO Advisory</option>
-                    <option value="project">Project Inquiry</option>
-                    <option value="investment">Investment Discussion</option>
-                    <option value="other">Other</option>
+                    <option value="Technical Partnership">Technical Partnership</option>
+                    <option value="CTO Advisory">CTO Advisory</option>
+                    <option value="Project Inquiry">Project Inquiry</option>
+                    <option value="Investment Discussion">Investment Discussion</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
                 <div>
@@ -150,6 +171,8 @@ export function ContactSection() {
                     id="message"
                     rows={4}
                     required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell me about your project..."
                     className="w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary"
                   />
