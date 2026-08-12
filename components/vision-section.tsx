@@ -13,7 +13,7 @@ const pillars = [
   },
   {
     icon: Layers,
-    title: "Scalable Innovation",
+    title: "Industrial deployment",
     description:
       "From monolith to microservices, I engineer platforms with horizontal scalability baked in. Each system is built to handle 10x growth without rearchitecting.",
   },
@@ -33,9 +33,8 @@ export function VisionSection() {
     <section id="vision" ref={ref} className="relative px-6 py-20 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div
-          className={`transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <span className="text-xs font-medium uppercase tracking-widest text-primary">
             Vision & Leadership
@@ -46,9 +45,8 @@ export function VisionSection() {
             of Digital Platforms
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            With a decade of experience shipping products at scale, I lead engineering
-            teams and architect systems that power industries. My approach combines
-            deep technical expertise with strategic product thinking.
+
+            With years of experience in large-scale product deployment, I lead engineering teams and design systems that support entire industrial sectors. My approach combines deep technical expertise with a strategic product vision.
           </p>
         </div>
 
@@ -56,9 +54,8 @@ export function VisionSection() {
           {pillars.map((pillar, index) => (
             <div
               key={pillar.title}
-              className={`group rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:border-primary/30 hover:shadow-[0_0_40px_rgba(0,212,170,0.06)] ${
-                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+              className={`group rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:border-primary/30 hover:shadow-[0_0_40px_rgba(0,212,170,0.06)] ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
               style={{ transitionDelay: `${(index + 1) * 200}ms` }}
             >
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20">

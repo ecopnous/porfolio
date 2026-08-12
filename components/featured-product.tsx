@@ -121,7 +121,7 @@ export function FeaturedProduct() {
               }`}
           >
             <p className="text-lg leading-relaxed text-muted-foreground">
-              A cloud-based management solution that digitizes and centralizes the operations of mobile money shops and electronic financial service agencies. From transaction recording to financial reporting, everything is managed through one intuitive platform.
+              A centralized platform for managing the daily activities of telecom and financial service shops, providing a clear view of transactions, cash movements, shop performance, and financial operations.
             </p>
 
             <div className="mt-8 space-y-4">
