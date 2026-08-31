@@ -1,13 +1,13 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
-import { useInView } from "@/hooks/use-in-view"
 import {
   getClientMonogram,
   type TrustClient,
 } from "@/lib/trust-clients"
 import { usePublishedCollection } from "@/hooks/use-published-collection"
+import { Reveal, Section, SectionHeader } from "@/components/section"
 
 function ClientLogo({ client }: { client: TrustClient }) {
   const [failed, setFailed] = useState(false)
@@ -16,7 +16,7 @@ function ClientLogo({ client }: { client: TrustClient }) {
   if (!client.logo || failed) {
     return (
       <div
-        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-sm font-bold text-primary"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/12 text-sm font-bold text-primary"
         aria-hidden="true"
       >
         {monogram}
@@ -25,7 +25,7 @@ function ClientLogo({ client }: { client: TrustClient }) {
   }
 
   return (
-    <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-secondary/60">
+    <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-hairline bg-secondary/60">
       <Image
         src={client.logo}
         alt=""
@@ -40,7 +40,7 @@ function ClientLogo({ client }: { client: TrustClient }) {
 
 function ClientCard({ client }: { client: TrustClient }) {
   const className =
-    "group flex items-center gap-4 rounded-xl border border-border/70 bg-card/50 px-4 py-4 transition-all duration-300 hover:border-primary/25 hover:bg-card"
+    "surface surface-hover group flex h-full items-center gap-4 px-4 py-4"
 
   const content = (
     <>
@@ -76,10 +76,9 @@ function ClientCard({ client }: { client: TrustClient }) {
 }
 
 export function TrustSection() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { threshold: 0.15 })
-  const { items: storedClients, loading } = usePublishedCollection<TrustClient & { imageUrl?: string }>("clients")
-  const isVisible = isInView || !loading
+  const { items: storedClients } = usePublishedCollection<
+    TrustClient & { imageUrl?: string }
+  >("clients")
   const trustClients = storedClients.map((client) => ({
     ...client,
     logo: client.logo || client.imageUrl,
@@ -88,55 +87,32 @@ export function TrustSection() {
   if (trustClients.length === 0) return null
 
   return (
-    <section id="trust" ref={ref} className="relative overflow-hidden px-6 py-20 md:py-24">
-      <div
-        className="pointer-events-none absolute inset-0 bg-secondary/30"
-        aria-hidden="true"
+    <Section id="trust" tone="tinted" divider>
+      <SectionHeader
+        eyebrow="Trusted by"
+        title="They trust me"
+        description="Companies and teams that turn to us to design, scale, and deploy their digital products."
+        aside={
+          <p className="text-sm text-muted-foreground">
+            <span className="text-3xl font-bold tracking-tight text-foreground">
+              {trustClients.length}+
+            </span>
+            <span className="mt-1 block">partners</span>
+          </p>
+        }
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div
-          className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-        >
-          <div className="max-w-xl">
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
-              Trusted by
-            </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-              They trust me
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-              Companies and teams that turn to us to design, scale, and deploy their digital products.
-            </p>
-          </div>
-          <p className="text-sm text-muted-foreground md:text-right">
-            <span className="font-semibold text-foreground">
-              {trustClients.length}+
-            </span>{" "}
-            partners
-          </p>
-        </div>
-
-        <div
-          className={`mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 transition-all duration-700 delay-150 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-        >
-          {trustClients.map((client, index) => (
-            <div
-              key={client.id}
-              className="transition-all duration-500"
-              style={{
-                transitionDelay: isVisible
-                  ? `${Math.min(index, 8) * 60}ms`
-                  : undefined,
-              }}
-            >
-              <ClientCard client={client} />
-            </div>
-          ))}
-        </div>
+      <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {trustClients.map((client, index) => (
+          <Reveal
+            key={client.id}
+            delay={Math.min(index, 8) * 60}
+            className="h-full"
+          >
+            <ClientCard client={client} />
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   )
 }
