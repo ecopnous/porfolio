@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import { useInView } from "@/hooks/use-in-view"
+import { Section } from "@/components/section"
 
 const stats = [
   {
@@ -74,30 +75,24 @@ function AnimatedCounter({
 }
 
 export function StatsSection() {
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { threshold: 0.25 })
 
   return (
-    <section ref={ref} className="relative overflow-hidden px-6 py-20 md:py-24">
+    <Section tone="tinted" divider>
       <div
-        className="pointer-events-none absolute inset-0 bg-secondary/40"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-primary/[0.06] blur-[100px]"
+        className="glow-orb pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 opacity-50"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl">
+      <div ref={ref}>
         <div
           className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
         >
           <div className="max-w-xl">
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
-              Impact
-            </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
+            <span className="eyebrow">Impact</span>
+            <h2 className="display mt-5 text-3xl text-foreground sm:text-4xl md:text-[2.75rem]">
               Numbers that reflect real delivery
             </h2>
           </div>
@@ -107,20 +102,20 @@ export function StatsSection() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-0 border-y border-border md:grid-cols-4">
+        <div className="surface mt-14 grid overflow-hidden p-0 sm:grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`relative px-1 py-10 transition-all duration-700 md:px-8 ${index < stats.length - 1 ? "md:border-r md:border-border" : ""
+              className={`relative border-b border-hairline px-6 py-9 transition-all duration-700 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 sm:[&:nth-child(odd)]:border-r md:border-b-0 md:[&:nth-child(odd)]:border-r-0 ${index < stats.length - 1 ? "md:border-r md:border-hairline" : ""
                 } ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
               style={{ transitionDelay: `${index * 120}ms` }}
             >
-              <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 0{index + 1}
               </span>
 
-              <div className="mt-5 text-5xl font-bold tracking-tight text-foreground md:text-6xl">
+              <div className="mt-5 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                 <AnimatedCounter
                   target={stat.value}
                   suffix={stat.suffix}
@@ -138,6 +133,6 @@ export function StatsSection() {
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

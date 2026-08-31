@@ -15,6 +15,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel"
+import { Reveal, Section, SectionHeader } from "@/components/section"
 
 function Stars({ rating }: { rating: number }) {
   const value = clampRating(rating)
@@ -57,7 +58,7 @@ function Avatar({ testimonial }: { testimonial: Testimonial }) {
   }
 
   return (
-    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-border">
+    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-hairline">
       <Image
         src={testimonial.image}
         alt={testimonial.name}
@@ -72,7 +73,7 @@ function Avatar({ testimonial }: { testimonial: Testimonial }) {
 
 function TestimonialSlide({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <article className="relative flex h-full flex-col rounded-2xl border border-border bg-card px-6 py-8 md:px-10 md:py-10">
+    <article className="surface relative flex h-full flex-col px-6 py-8 md:px-10 md:py-10">
       <Quote
         size={28}
         className="mb-6 text-primary/40"
@@ -85,7 +86,7 @@ function TestimonialSlide({ testimonial }: { testimonial: Testimonial }) {
         “{testimonial.comment}”
       </p>
 
-      <div className="mt-8 flex items-center gap-4 border-t border-border pt-6">
+      <div className="mt-8 flex items-center gap-4 border-t border-hairline pt-6">
         <Avatar testimonial={testimonial} />
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold text-foreground">
@@ -101,13 +102,12 @@ function TestimonialSlide({ testimonial }: { testimonial: Testimonial }) {
 }
 
 export function TestimonialsSection() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { threshold: 0.15 })
   const [api, setApi] = useState<CarouselApi>()
   const [selected, setSelected] = useState(0)
   const [count, setCount] = useState(0)
-  const { items: testimonials, loading } = usePublishedCollection<Testimonial>("testimonials")
-  const isVisible = isInView || !loading
+  const { items: testimonials } = usePublishedCollection<Testimonial>("testimonials")
 
   const onSelect = useCallback((carouselApi: CarouselApi) => {
     if (!carouselApi) return
@@ -141,61 +141,37 @@ export function TestimonialsSection() {
   if (testimonials.length === 0) return null
 
   return (
-    <section
-      id="testimonials"
-      ref={sectionRef}
-      className="relative overflow-hidden px-6 py-20 md:py-24"
-    >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"
-        aria-hidden="true"
-      />
+    <Section id="testimonials" divider>
+      <div ref={sectionRef}>
+        <SectionHeader
+          eyebrow="Testimonials"
+          title="What partners say"
+          description="Real feedback from founders and teams who shipped with Ecopnous."
+          aside={
+            testimonials.length > 1 ? (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => api?.scrollPrev()}
+                  aria-label="Previous testimonial"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-surface text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => api?.scrollNext()}
+                  aria-label="Next testimonial"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-surface text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            ) : undefined
+          }
+        />
 
-      <div className="mx-auto max-w-7xl">
-        <div
-          className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <div className="max-w-xl">
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
-              Testimonials
-            </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl text-balance">
-              What partners say
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-              Real feedback from founders and teams who shipped with Ecopnous.
-            </p>
-          </div>
-
-          {testimonials.length > 1 && (
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => api?.scrollPrev()}
-                aria-label="Previous testimonial"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                type="button"
-                onClick={() => api?.scrollNext()}
-                aria-label="Next testimonial"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div
-          className={`mt-12 transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
+        <Reveal className="mt-12">
           <Carousel
             setApi={setApi}
             opts={{
@@ -225,17 +201,17 @@ export function TestimonialsSection() {
                   aria-label={`Go to testimonial ${index + 1}`}
                   aria-current={selected === index}
                   onClick={() => api?.scrollTo(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
                     selected === index
                       ? "w-7 bg-primary"
-                      : "w-2 bg-border hover:bg-muted-foreground/40"
+                      : "w-1.5 bg-border hover:bg-muted-foreground/40"
                   }`}
                 />
               ))}
             </div>
           )}
-        </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   )
 }

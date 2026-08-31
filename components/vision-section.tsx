@@ -1,8 +1,7 @@
 "use client"
 
-import { useRef } from "react"
-import { useInView } from "@/hooks/use-in-view"
 import { Lightbulb, Layers, Zap } from "lucide-react"
+import { Reveal, Section, SectionHeader } from "@/components/section"
 
 const pillars = [
   {
@@ -26,49 +25,41 @@ const pillars = [
 ]
 
 export function VisionSection() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { threshold: 0.2 })
-
   return (
-    <section id="vision" ref={ref} className="relative px-6 py-20 md:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div
-          className={`transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-        >
-          <span className="text-xs font-medium uppercase tracking-widest text-primary">
-            Vision & Leadership
-          </span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            Engineering the Future
-            <br />
-            of Digital Platforms
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+    <Section id="vision" divider>
+      <SectionHeader
+        eyebrow="Vision & Leadership"
+        title={
+          <>
+            Engineering the future
+            <br className="hidden sm:block" /> of digital platforms
+          </>
+        }
+        description="With years of experience in large-scale product deployment, I lead engineering teams and design systems that support entire industrial sectors — combining deep technical expertise with a strategic product vision."
+      />
 
-            With years of experience in large-scale product deployment, I lead engineering teams and design systems that support entire industrial sectors. My approach combines deep technical expertise with a strategic product vision.
-          </p>
-        </div>
-
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {pillars.map((pillar, index) => (
-            <div
-              key={pillar.title}
-              className={`group rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:border-primary/30 hover:shadow-[0_0_40px_rgba(0,212,170,0.06)] ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
-              style={{ transitionDelay: `${(index + 1) * 200}ms` }}
-            >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20">
-                <pillar.icon size={24} />
+      <div className="mt-14 grid gap-4 md:grid-cols-3 md:gap-5">
+        {pillars.map((pillar, index) => (
+          <Reveal key={pillar.title} delay={index * 120} className="h-full">
+            <article className="surface surface-hover glow-edge group h-full p-7">
+              <div className="flex items-center justify-between">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/12 text-primary transition-colors duration-300 group-hover:bg-primary/20">
+                  <pillar.icon size={20} />
+                </span>
+                <span className="font-mono text-xs text-muted-foreground">
+                  0{index + 1}
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-foreground">{pillar.title}</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">
+              <h3 className="mt-6 text-lg font-semibold tracking-tight text-foreground">
+                {pillar.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {pillar.description}
               </p>
-            </div>
-          ))}
-        </div>
+            </article>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   )
 }

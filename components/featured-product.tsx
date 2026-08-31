@@ -1,160 +1,113 @@
 "use client"
 
-import { useRef } from "react"
 import Link from "next/link"
-import { useInView } from "@/hooks/use-in-view"
-import { ArrowUpRight, Smartphone, Shield, TrendingUp, Database } from "lucide-react"
+import { ArrowUpRight, Shield, TrendingUp, Database } from "lucide-react"
+import { Reveal, Section, SectionHeader } from "@/components/section"
 
 const highlights = [
-  { icon: Shield, label: "Bank-Grade Security" },
-  { icon: TrendingUp, label: "Real-Time Analytics" },
-  { icon: Database, label: "Scalable Architecture" },
+  {
+    icon: Shield,
+    label: "Bank-Grade Security",
+    detail: "Encrypted transactions, granular roles and full audit trail.",
+  },
+  {
+    icon: TrendingUp,
+    label: "Real-Time Analytics",
+    detail: "Live shop performance, cash movements and margins.",
+  },
+  {
+    icon: Database,
+    label: "Scalable Architecture",
+    detail: "Multi-shop data model built for national rollouts.",
+  },
 ]
 
-export function FeaturedProduct() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { threshold: 0.15 })
+const stack = ["Flutter", "Supabase", "PostgreSQL"]
 
+export function FeaturedProduct() {
   return (
-    <section ref={ref} className="relative overflow-hidden px-6 py-20 md:py-24">
-      {/* Ambient glow */}
+    <Section tone="tinted" divider>
       <div
-        className="pointer-events-none absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/4 blur-[150px]"
+        className="glow-orb pointer-events-none absolute top-1/3 left-1/2 h-[420px] w-[520px] -translate-x-1/2"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div
-          className={`transition-all duration-700 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-        >
-          <span className="text-xs font-medium uppercase tracking-widest text-primary">
-            Featured Product
-          </span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            Point-of-sale management
-          </h2>
-        </div>
-
-        <div className="mt-16 grid items-center gap-16 lg:grid-cols-2">
-          {/* Mobile Mockup */}
-          <div
-            className={`flex items-center justify-center transition-all duration-1000 ${isInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
+      <SectionHeader
+        eyebrow="Featured product"
+        title="Point-of-sale management"
+        description="A centralized platform for telecom and financial service shops — transactions, cash movements, shop performance and financial operations in one place."
+        aside={
+          <Link
+            href="/projects/e-money-business"
+            className="group inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-5 py-2.5 text-sm font-semibold text-foreground backdrop-blur-md transition-colors hover:border-primary/40 hover:text-primary"
           >
-            <div className="relative">
-              {/* Phone frame */}
-              <div className="relative mx-auto w-[280px] rounded-[2.5rem] border-2 border-border bg-card p-3 shadow-[0_0_60px_rgba(0,212,170,0.08)] animate-float">
-                {/* <div className="overflow-hidden rounded-[2rem] bg-secondary"> */}
-                {/* Status bar */}
-                {/* <div className="flex items-center justify-between bg-card px-5 py-3">
-                    <span className="text-[10px] text-muted-foreground">9:41</span>
-                    <div className="flex gap-1">
-                      <div className="h-1.5 w-3 rounded-sm bg-muted-foreground" />
-                      <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
-                    </div>
-                  </div> */}
-                {/* App content mockup */}
-                {/* <div className="space-y-4 px-5 pb-6 pt-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Smartphone size={16} className="text-primary" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-foreground">FinTrack Pro</div>
-                        <div className="text-[10px] text-muted-foreground">Dashboard</div>
-                      </div>
-                    </div>
-                    <div className="rounded-xl bg-card p-4">
-                      <div className="text-[10px] text-muted-foreground mb-1">Total Balance</div>
-                      <div className="text-xl font-bold text-foreground">$124,563.00</div>
-                      <div className="mt-1 text-[10px] text-primary flex items-center gap-1">
-                        <TrendingUp size={10} /> +12.4% this month
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      {["Revenue", "Expenses", "Profit"].map((item, i) => (
-                        <div
-                          key={item}
-                          className="flex items-center justify-between rounded-lg bg-card p-3"
-                        >
-                          <span className="text-[10px] text-muted-foreground">{item}</span>
-                          <div
-                            className="h-1.5 rounded-full bg-primary/30"
-                            style={{ width: `${60 - i * 15}px` }}
-                          >
-                            <div
-                              className="h-1.5 rounded-full bg-primary"
-                              style={{ width: `${80 - i * 20}%` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {["Send", "Receive", "Reports"].map((action) => (
-                        <div
-                          key={action}
-                          className="flex flex-col items-center gap-1 rounded-lg bg-card p-2"
-                        >
-                          <div className="h-6 w-6 rounded-full bg-primary/10" />
-                          <span className="text-[8px] text-muted-foreground">{action}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div> */}
-                {/* </div> */}
-                <img
-                  src="https://i.ibb.co/cSGpTZJV/Screenshot-20260525-151644.jpg"
-                  alt="e-Money Business App Mockup"
-                  width={280}
-                  height={600}
-                  className="rounded-[2rem]"
-                />
-              </div>
+            View case study
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
+        }
+      />
+
+      <Reveal className="mt-14">
+        <div className="surface grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-14">
+          {/* Mockup */}
+          <div className="relative flex justify-center">
+            <div
+              className="glow-orb pointer-events-none absolute inset-x-8 top-10 bottom-10"
+              aria-hidden="true"
+            />
+            <div className="animate-float relative w-[260px] rounded-[2.25rem] border border-hairline bg-background p-2.5 shadow-[var(--shadow-lift)] sm:w-[280px]">
+              <img
+                src="https://i.ibb.co/cSGpTZJV/Screenshot-20260525-151644.jpg"
+                alt="e-Money Business point-of-sale app"
+                width={280}
+                height={600}
+                className="w-full rounded-[1.85rem]"
+              />
             </div>
           </div>
 
-          {/* Content */}
-          <div
-            className={`transition-all duration-1000 delay-300 ${isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-              }`}
-          >
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              A centralized platform for managing the daily activities of telecom and financial service shops, providing a clear view of transactions, cash movements, shop performance, and financial operations.
-            </p>
-
-            <div className="mt-8 space-y-4">
-              {highlights.map((h) => (
-                <div key={h.label} className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                    <h.icon size={18} className="text-primary" />
-                  </div>
-                  <span className="font-medium text-foreground">{h.label}</span>
-                </div>
+          {/* Highlights */}
+          <div>
+            <ul className="space-y-3">
+              {highlights.map((item) => (
+                <li
+                  key={item.label}
+                  className="group flex gap-4 rounded-2xl border border-transparent px-4 py-4 transition-colors duration-300 hover:border-hairline hover:bg-background/50"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/12 text-primary">
+                    <item.icon size={18} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">
+                      {item.label}
+                    </span>
+                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
+                      {item.detail}
+                    </span>
+                  </span>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            <div className="mt-8 flex flex-wrap gap-2">
-              {["Flutter", "Supabase", "PostgreSQL"].map((tech) => (
+            <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-hairline pt-6">
+              <span className="mr-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                Built with
+              </span>
+              {stack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                  className="rounded-full border border-hairline px-3 py-1.5 text-xs font-medium text-foreground"
                 >
                   {tech}
                 </span>
               ))}
             </div>
-
-            <Link
-              href="/projects/e-money-business"
-              className="mt-8 inline-flex items-center gap-2 text-primary font-semibold transition-all hover:gap-3"
-            >
-              View Case Study <ArrowUpRight size={18} />
-            </Link>
           </div>
         </div>
-      </div>
-    </section>
+      </Reveal>
+    </Section>
   )
 }

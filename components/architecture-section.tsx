@@ -1,8 +1,7 @@
 "use client"
 
-import { useRef } from "react"
-import { useInView } from "@/hooks/use-in-view"
 import { Server, GitBranch, Shield, Cpu, Globe, Database } from "lucide-react"
+import { Reveal, Section, SectionHeader } from "@/components/section"
 
 const principles = [
   {
@@ -44,57 +43,52 @@ const principles = [
 ]
 
 export function ArchitectureSection() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { threshold: 0.1 })
-
   return (
-    <section id="architecture" ref={ref} className="relative px-6 py-20 md:py-24">
-      {/* Background accent */}
+    <Section id="architecture" divider>
       <div
-        className="pointer-events-none absolute inset-0 bg-secondary/30"
+        className="backdrop-dots pointer-events-none absolute inset-0"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div
-          className={`transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <span className="text-xs font-medium uppercase tracking-widest text-primary">
-            Engineering & Architecture
-          </span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            Built for Scale,
-            <br />
-            Engineered for Reliability
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Every system I design follows battle-tested engineering principles.
-            Clean code, scalable infrastructure, and security are non-negotiable.
-          </p>
-        </div>
+      <SectionHeader
+        eyebrow="Engineering & architecture"
+        title={
+          <>
+            Built for scale,
+            <br className="hidden sm:block" /> engineered for reliability
+          </>
+        }
+        description="Every system I design follows battle-tested engineering principles. Clean code, scalable infrastructure, and security are non-negotiable."
+      />
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {principles.map((p, i) => (
-            <div
-              key={p.title}
-              className={`group rounded-2xl border border-border bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card ${
-                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${(i + 1) * 100}ms` }}
-            >
-              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
-                <p.icon size={20} />
+      {/* Hairline matrix: cells share borders instead of floating as separate cards. */}
+      <Reveal className="mt-14">
+        <div className="surface overflow-hidden p-0">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3">
+            {principles.map((p, i) => (
+              <div
+                key={p.title}
+                className="group relative border-b border-hairline p-7 transition-colors duration-300 last:border-b-0 hover:bg-primary/[0.03] md:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0 md:[&:nth-child(odd)]:border-r lg:[&:nth-child(odd)]:border-r-0 lg:[&:not(:nth-child(3n))]:border-r"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/12 text-primary transition-colors group-hover:bg-primary/20">
+                    <p.icon size={18} />
+                  </span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-base font-semibold tracking-tight text-foreground">
+                  {p.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {p.description}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {p.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </Reveal>
+    </Section>
   )
 }
